@@ -1,0 +1,6 @@
+language: c
+script: bash -ex travis.sh
+env:
+  matrix:
+  - OCAML_VERSION=4.01.0 OPAM_VERSION=1.2.0 MIRAGE_BACKEND=xen DEPLOY=0
+  - OCAML_VERSION=4.01.0 OPAM_VERSION=1.2.0 MIRAGE_BACKEND=unix
