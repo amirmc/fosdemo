@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/amirmc/fosdemo.svg?branch=master)](https://travis-ci.org/amirmc/fosdemo)
+
 ## Unikernel to serve 2048 game from a cubieboard.
 
 These are the files needed to generate a [mirage unikernel][] from a
