@@ -26,7 +26,7 @@ channel=11
 sudo ip link set wlan1 up
 ```
 
-* start hostapd.  Output should look like this:
+* start hostapd:
 
 ```
 sudo hostapd /etc/hostapd.conf
