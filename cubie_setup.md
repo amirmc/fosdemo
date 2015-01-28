@@ -29,7 +29,7 @@ sudo ip link set wlan1 up
 * start hostapd:
 
 ```
-sudo hostapd /etc/hostapd.conf
+sudo hostapd /etc/hostapd.conf &
 ```
 
 Output should look something like this (the important part being "AP-ENABLED"):
@@ -100,3 +100,12 @@ sudo xl create www.xl -c
 ```
 
 Now you'll (hopefully) see your unikernel come up and get a DHCP address.  You should then be able to load up a fun game!  Yay!
+
+Optionally:
+
+* allow users to navigate to http://2048 by adding this line to `/etc/hosts`:
+
+```
+192.168.252.2	2048
+```
+
