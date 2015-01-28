@@ -29,7 +29,7 @@ sudo ip link set wlan1 up
 * start hostapd:
 
 ```
-sudo hostapd /etc/hostapd.conf &
+sudo hostapd -B /etc/hostapd.conf 
 ```
 
 Output should look something like this (the important part being "AP-ENABLED"):
