@@ -1,4 +1,5 @@
-Throughout this document I'll refer to the wireless interface as `wlan1`; on a CubieBoard, it's likely that the wireless dongle will be `wlan0` instead.
+Throughout this document we'll refer to the wireless interface as `wlan0`;
+on a CubieTruck, it's likely that the wireless *dongle* will be `wlan1` instead.
 
 * install hostapd (for wireless access point) and dnsmasq (for dhcp server): 
 
@@ -15,15 +16,15 @@ sudo kill `pidof dnsmasq`
 * create the file `/etc/hostapd.conf` and add these lines to it:
 
 ```
-interface=wlan1
-ssid=cubietruck-test
+interface=wlan0
+ssid=2048.mirage.io <- visit this!
 channel=11
 ```
 
 * initialise the wireless usb dongle:
 
 ```
-sudo ip link set wlan1 up
+sudo ip link set wlan0 up
 ```
 
 * start hostapd:
@@ -35,10 +36,10 @@ sudo hostapd -B /etc/hostapd.conf
 Output should look something like this (the important part being "AP-ENABLED"):
 ```
 Configuration file: /etc/hostapd.conf
-Using interface wlan1 with hwaddr c4:04:15:7a:98:a4 and ssid "cubietruck-test"
+Using interface wlan1 with hwaddr c4:04:15:7a:98:a4 and ssid "2048.mirage.io <- visit this"
 VLAN: vlan_set_name_type: SET_VLAN_NAME_TYPE_CMD name_type=2 failed: Package not installed
-wlan1: interface state UNINITIALIZED->ENABLED
-wlan1: AP-ENABLED 
+wlan0: interface state UNINITIALIZED->ENABLED
+wlan0: AP-ENABLED 
 ```
 
 
@@ -51,7 +52,7 @@ sudo brctl addbr br1
 * add the wireless interface to the new network bridge:
 
 ```
-sudo brctl addif br1 wlan1
+sudo brctl addif br1 wlan0
 ```
 
 * set up a static network on the new bridge.  I chose a 192.168 network that's unlikely to collide with other networks in use, but you may wish to use something else (particularly if you happen to be using a network with the same addressing to configure the CubieBoard!); if so, you'll need to change it here and in the step below where you configure `dnsmasq.conf`.
@@ -93,19 +94,19 @@ make
 vif = [ 'mac=c0:ff:ee:c0:ff:ee,bridge=br1' ]
 ```
 
-* try it out!  
+* try it out!
 
 ```
-sudo xl create www.xl -c
+sudo xl create www.xl
 ```
 
 Now you'll (hopefully) see your unikernel come up and get a DHCP address.  You should then be able to load up a fun game!  Yay!
 
 Optionally:
 
-* allow users to navigate to http://2048 by adding this line to `/etc/hosts`:
+* allow users to navigate to http://2048.mirage.io by adding this line to `/etc/dnsmasq.conf`:
 
 ```
-192.168.252.2	2048
+address=/2048.mirage.io/192.168.252.2
 ```
 
