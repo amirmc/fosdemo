@@ -4,3 +4,5 @@ sudo brctl addbr br1
 sudo brctl addif br1 wlan0
 sudo ifconfig br1 192.168.252.1 netmask 255.255.255.0
 sudo dnsmasq
+sudo xl create /home/mirage/fosdemo/www.xl
+
